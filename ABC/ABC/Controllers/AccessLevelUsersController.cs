@@ -7,14 +7,17 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using ABC;
+using ABC.Authentication;
 
 namespace ABC.Controllers
 {
+    [CustomAuthenticationFilter]
     public class AccessLevelUsersController : Controller
     {
         private ThakshilawaEntities2 db = new ThakshilawaEntities2();
 
         // GET: AccessLevelUsers
+        [CustomAuthorize("AccessLevelUser")]
         public ActionResult Index()
         {
             var accessLevelUsers = db.AccessLevelUsers.Include(a => a.AccessLevel).Include(a => a.UserData);

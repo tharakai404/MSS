@@ -7,15 +7,18 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using ABC;
+using ABC.Authentication;
 using ABC.Models;
 
 namespace ABC.Controllers
 {
+    [CustomAuthenticationFilter]
     public class ClassRoomsController : Controller
     {
         private ThakshilawaEntities2 db = new ThakshilawaEntities2();
 
         // GET: ClassRooms
+        [CustomAuthorize("ClassRoom")]
         public ActionResult Index()
         {
             var classRooms = db.ClassRooms.Include(c => c.Lecture).Include(c => c.UserData);

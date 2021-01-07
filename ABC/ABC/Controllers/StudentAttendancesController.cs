@@ -7,15 +7,18 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using ABC;
+using ABC.Authentication;
 using ABC.Models;
 
 namespace ABC.Controllers
 {
+    [CustomAuthenticationFilter]
     public class StudentAttendancesController : Controller
     {
         private ThakshilawaEntities2 db = new ThakshilawaEntities2();
 
         // GET: StudentAttendances
+        [CustomAuthorize("StudentAttendance")]
         public ActionResult Index()
         {   DateTime today = DateTime.Now;
             today = today.AddDays(-1);

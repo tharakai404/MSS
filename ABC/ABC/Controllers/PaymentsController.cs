@@ -9,6 +9,7 @@ using System.Text;
 using System.Web;
 using System.Web.Mvc;
 using ABC;
+using ABC.Authentication;
 using ABC.Models;
 using ABC.Services;
 using iTextSharp.text;
@@ -16,12 +17,14 @@ using iTextSharp.text.pdf;
 
 namespace ABC.Controllers
 {
+    [CustomAuthenticationFilter]
     public class PaymentsController : Controller
     {
         private ThakshilawaEntities2 db = new ThakshilawaEntities2();
         AppServices appServices = new AppServices();
 
         // GET: Payments
+        [CustomAuthorize("Payment")]
         public ActionResult Index()
         {
             var payments = db.Payments.Include(p => p.Enrollment).Include(p => p.UserData);

@@ -7,9 +7,11 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using ABC;
+using ABC.Authentication;
 
 namespace ABC.Controllers
 {
+    [CustomAuthenticationFilter]
     public class StudentsController : Controller
     {
         private ThakshilawaEntities2 db = new ThakshilawaEntities2();
@@ -28,7 +30,7 @@ namespace ABC.Controllers
          //   return PartialView(students.ToList());
         }
 
-
+        [CustomAuthorize("Student")]
         public ActionResult Search()
         {
             return View();

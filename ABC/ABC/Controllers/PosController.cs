@@ -9,18 +9,22 @@ using System.Text;
 using System.Web;
 using System.Web.Mvc;
 using ABC;
+using ABC.Authentication;
 using ABC.Services;
 using iTextSharp.text;
 using iTextSharp.text.pdf;
 
 namespace ABC.Controllers
 {
+    [CustomAuthenticationFilter]
     public class PosController : Controller
     {
         private ThakshilawaEntities2 db = new ThakshilawaEntities2();
         AppServices appServices = new AppServices();
 
         // GET: Pos
+
+        [CustomAuthorize("Pos")]
         public ActionResult Index()
         {
             var sellingItems = db.SellingItems.Include(s => s.UserData);

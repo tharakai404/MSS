@@ -7,14 +7,17 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using ABC;
+using ABC.Authentication;
 
 namespace ABC.Controllers
 {
+    [CustomAuthenticationFilter]
     public class UserDatasController : Controller
     {
         private ThakshilawaEntities2 db = new ThakshilawaEntities2();
 
         // GET: UserDatas
+        [CustomAuthorize("UserData")]
         public ActionResult Index()
         {
             return View(db.UserDatas.ToList());
