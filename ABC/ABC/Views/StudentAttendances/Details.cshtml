@@ -1,0 +1,56 @@
+﻿@model ABC.Enrollment
+
+<div>
+    <h4>Enrollment Details</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            Student Name
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Student.name)
+        </dd>
+
+        <dt>
+            Class Details
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ClassRoom.name)
+        </dd>
+
+        <dt>
+            Commencement date
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ClassRoom.commencementdate)
+        </dd>
+
+        <dt>
+            Reg ID
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Student.regid)
+        </dd>
+
+        <dt>
+            NIC
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Student.nic)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.paymentdone)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.paymentdone)
+        </dd>
+
+    </dl>
+</div>

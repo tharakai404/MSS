@@ -1,0 +1,52 @@
+﻿@model IEnumerable<ABC.UserAttendance>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Today Staff Attendance</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.date)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.inout)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.userid)
+        </th>
+        <th>
+          created by
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.date)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.inout)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.UserData1.name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.UserData.name)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.id }) |
+            @Html.ActionLink("Details", "Details", new { id=item.id }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.id })
+        </td>
+    </tr>
+}
+
+</table>

@@ -1,0 +1,58 @@
+﻿@model IEnumerable<ABC.Enrollment>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Enrollments</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.date)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.paymentdone)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ClassRoom.name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Student.name)
+        </th>
+        <th>
+            createdby
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.date)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.paymentdone)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ClassRoom.name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Student.name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.UserData.name)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.id }) |
+            @Html.ActionLink("Details", "Details", new { id=item.id }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.id })
+        </td>
+    </tr>
+}
+
+</table>

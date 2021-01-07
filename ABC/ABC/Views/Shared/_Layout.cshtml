@@ -1,0 +1,147 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thakshilawa</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    @Scripts.Render("~/bundles/jquery")
+</head>
+<body>
+    <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                @Html.ActionLink("Thakshilawa", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+            </div>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    <li>
+                        <div class="dropdown">
+                            <button class="dropbtn">User</button>
+                            <div class="dropdown-content">
+                                @Html.ActionLink("User", "Index", "UserDatas")
+                                @Html.ActionLink("Role", "Index", "AccessLevels")
+                                @Html.ActionLink("User assigned roles", "Index", "AccessLevelUsers")
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="dropdown">
+                            <button class="dropbtn">Base Data</button>
+                            <div class="dropdown-content">
+                                @Html.ActionLink("Lecture", "Index", "Lectures")
+                                @Html.ActionLink("Class Rooms", "Index", "ClassRooms")
+                                @Html.ActionLink("Students", "Search", "Students")
+                                @Html.ActionLink("Selling Items", "Index", "SellingItems")
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="dropdown">
+                            <button class="dropbtn">Manage</button>
+                            <div class="dropdown-content">
+                                @Html.ActionLink("Enrollments", "Index", "Enrollments")
+                                @Html.ActionLink("Payments", "Index", "Payments")
+                                @Html.ActionLink("Student Attendances", "Index", "StudentAttendances")
+                                @Html.ActionLink("User Attendances", "Index", "UserAttendances")
+                                @Html.ActionLink("Point of Sale", "Index", "Pos")
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="dropdown">
+                            <button class="dropbtn">Reports</button>
+                            <div class="dropdown-content">
+                                @Html.ActionLink("Report", "PrintPDF", "Report")
+                                @Html.ActionLink("Specific date range", "PrintPDFDayWise", "Report")
+                                @Html.ActionLink("Student Attendence", "PrintPDFDayWiseAttendence", "Report")
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+                @Html.Partial("_LoginPartial")
+            </div>
+        </div>
+    </div>
+    <div class="container body-content" style="background-color: #000000c2;">
+        <div>
+            @RenderBody()
+        </div>
+        <hr />
+        <footer style="margin-top: 3%;">
+            <p>&copy; @DateTime.Now.Year -  Thakshilawa</p>
+        </footer>
+    </div>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+</body>
+</html>
+<style>
+    /* Style The Dropdown Button */
+    .dropbtn {
+        background-color:#222222;
+        color:#ffffff8a;
+        padding: 16px;
+        border: none;
+        cursor: pointer;
+    }
+
+    /* The container <div> - needed to position the dropdown content */
+    .dropdown {
+        position: relative;
+        display: inline-block;
+    }
+
+    /* Dropdown Content (Hidden by Default) */
+    .dropdown-content {
+        display: none;
+        position: absolute;
+        background-color: #f9f9f9;
+        min-width: 160px;
+        box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+        z-index: 1;
+    }
+
+        /* Links inside the dropdown */
+        .dropdown-content a {
+            color: black;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+        }
+
+            /* Change color of dropdown links on hover */
+            .dropdown-content a:hover {
+                background-color: #f1f1f1
+            }
+
+    /* Show the dropdown menu on hover */
+    .dropdown:hover .dropdown-content {
+        display: block;
+    }
+
+    /* Change the background color of the dropdown button when the dropdown content is shown */
+    .dropdown:hover .dropbtn {
+        color: white;
+    }
+    #summary-panel {
+          background-color: #33333370;
+          height: 350px;
+          overflow-y: scroll;
+    }
+
+        body {
+        background: url("/images/back2.jpg") no-repeat fixed;
+        background-size: cover;
+        color: #fff;
+    }
+</style>
+

@@ -1,0 +1,99 @@
+﻿@model IEnumerable<ABC.Models.CartDTO>
+
+@{
+    Layout = "~/Views/Shared/_Layout2.cshtml";
+
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    @Scripts.Render("~/bundles/jquery")
+    <title>ShowCart</title>
+</head>
+<body>
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.item)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.qty)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Wash)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Iron)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Dryclean)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.value)
+            </th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.item)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.qty)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Wash)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Iron)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Dryclean)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.value)
+        </td>
+        <td>
+            <button onclick="deleteItem(@Html.DisplayFor(modelItem => item.id))">Remove</button>
+        </td>
+    </tr>
+        }
+
+    </table>
+
+    <button>
+        @Html.ActionLink("Checkout", "Register")
+    </button>
+</body>
+</html>
+<script>
+    function deleteItem(id) {
+
+         $.ajax(
+                {
+                    url: '@Url.Action("DeleteFromCart", "Cart")',
+                    data: { id: id},
+                    cache: false,
+                    type: 'post',
+                    dataType: "html",
+                    success: successFunc,
+                    error: errorFunc
+                });
+
+                function successFunc(data)
+                {
+                    alert(data);
+                    window.location.reload();
+                }
+
+                function errorFunc(error)
+                {
+                    alert('MVC controller call failed.');
+                }
+    }
+
+</script>

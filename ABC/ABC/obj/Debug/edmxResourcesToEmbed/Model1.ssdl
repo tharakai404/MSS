@@ -1,0 +1,425 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="AppRole">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Role" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Maintenance">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Description" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Amount" Type="decimal" Precision="18" Scale="0" Nullable="false" />
+    <Property Name="Date" Type="date" Nullable="false" />
+    <Property Name="unit_id" Type="int" Nullable="false" />
+    <Property Name="CreatedBy" Type="nvarchar(max)" />
+    <Property Name="CreatedDate" Type="date" />
+    <Property Name="UpdatedBy" Type="nvarchar(max)" />
+    <Property Name="UpdetedDate" Type="date" />
+  </EntityType>
+  <EntityType Name="Owner">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Address" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Telephone" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="CreatedBy" Type="nvarchar(max)" />
+    <Property Name="CreatedDate" Type="date" />
+    <Property Name="UpdatedBy" Type="nvarchar(max)" />
+    <Property Name="UpdatedDate" Type="date" />
+  </EntityType>
+  <EntityType Name="Payment">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Date" Type="date" Nullable="false" />
+    <Property Name="Description" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Amount" Type="decimal" Precision="18" Scale="0" Nullable="false" />
+    <Property Name="Type" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="tenant_id" Type="int" Nullable="false" />
+    <Property Name="unit_id" Type="int" Nullable="false" />
+    <Property Name="CreatedBy" Type="nvarchar(max)" />
+    <Property Name="CreatedDate" Type="date" />
+    <Property Name="UpdatedBy" Type="nvarchar(max)" />
+    <Property Name="UpdatedDate" Type="date" />
+  </EntityType>
+  <EntityType Name="Rent">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="tenant_id" Type="int" Nullable="false" />
+    <Property Name="unit_id" Type="int" Nullable="false" />
+    <Property Name="Date" Type="date" Nullable="false" />
+    <Property Name="PeriodsInMonths" Type="int" Nullable="false" />
+    <Property Name="monthlyRentFee" Type="decimal" Precision="18" Scale="0" Nullable="false" />
+    <Property Name="KeyMoney" Type="decimal" Precision="18" Scale="0" Nullable="false" />
+    <Property Name="CreatedBy" Type="nvarchar(max)" />
+    <Property Name="CreatedDate" Type="date" />
+    <Property Name="UpdatedBy" Type="nvarchar(max)" />
+    <Property Name="UpdatedDate" Type="date" />
+  </EntityType>
+  <EntityType Name="RentPaymentDetails">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Date" Type="date" Nullable="false" />
+    <Property Name="tenant_id" Type="int" Nullable="false" />
+    <Property Name="unit_id" Type="int" Nullable="false" />
+    <Property Name="rent_id" Type="int" Nullable="false" />
+    <Property Name="payment_id" Type="int" Nullable="false" />
+    <Property Name="amount" Type="decimal" Precision="18" Scale="0" Nullable="false" />
+    <Property Name="CreatedBy" Type="nvarchar(max)" />
+    <Property Name="CreatedDate" Type="date" />
+    <Property Name="UpdatedBy" Type="nvarchar(max)" />
+    <Property Name="UpdatedDate" Type="date" />
+  </EntityType>
+  <EntityType Name="ResidentialUnits">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Address" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Description" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="owner_id" Type="int" Nullable="false" />
+    <Property Name="CreatedBy" Type="nvarchar(max)" />
+    <Property Name="CreatedDate" Type="date" />
+    <Property Name="UpdatedBy" Type="nvarchar(max)" />
+    <Property Name="UpdatedDate" Type="date" />
+  </EntityType>
+  <EntityType Name="SecurityOfficer">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="OfficerName" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Contact_no" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="NIC" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="unit_id" Type="int" Nullable="false" />
+    <Property Name="CreatedBy" Type="nvarchar(max)" />
+    <Property Name="CreatedDate" Type="date" />
+    <Property Name="UpdatedBy" Type="nvarchar(max)" />
+    <Property Name="UpdateDate" Type="date" />
+  </EntityType>
+  <EntityType Name="sysdiagrams">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="principal_id" Type="int" Nullable="false" />
+    <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="version" Type="int" />
+    <Property Name="definition" Type="varbinary(max)" />
+  </EntityType>
+  <EntityType Name="Tenant">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Telephone" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="NIC" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="CreatedBy" Type="nvarchar(max)" />
+    <Property Name="CreatedDate" Type="date" />
+    <Property Name="UpdatedBy" Type="nvarchar(max)" />
+    <Property Name="UpdatedDate" Type="date" />
+  </EntityType>
+  <EntityType Name="UserData">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="UserId" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="UserName" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Password" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="CreatedBy" Type="nvarchar(max)" />
+    <Property Name="CreatedDate" Type="date" />
+    <Property Name="UpdatedBy" Type="nvarchar(max)" />
+    <Property Name="UpdatedDate" Type="date" />
+  </EntityType>
+  <EntityType Name="UserLog">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Date" Type="date" Nullable="false" />
+    <Property Name="User_name" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Description" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="UserRole">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="user_id" Type="int" Nullable="false" />
+    <Property Name="role_id" Type="int" Nullable="false" />
+    <Property Name="loginId" Type="nchar" MaxLength="10" Nullable="false" />
+    <Property Name="CreatedBy" Type="nvarchar(max)" />
+    <Property Name="CreatedDate" Type="date" />
+    <Property Name="UpdatedBy" Type="nvarchar(max)" />
+    <Property Name="UpdatedDate" Type="date" />
+  </EntityType>
+  <Association Name="FK_Payment_Payment_tenant">
+    <End Role="Tenant" Type="Self.Tenant" Multiplicity="1" />
+    <End Role="Payment" Type="Self.Payment" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Tenant">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="Payment">
+        <PropertyRef Name="tenant_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Payment_Payment_unit">
+    <End Role="ResidentialUnits" Type="Self.ResidentialUnits" Multiplicity="1" />
+    <End Role="Payment" Type="Self.Payment" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ResidentialUnits">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="Payment">
+        <PropertyRef Name="unit_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_RentPaymentDetails_Payment">
+    <End Role="Payment" Type="Self.Payment" Multiplicity="1" />
+    <End Role="RentPaymentDetails" Type="Self.RentPaymentDetails" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Payment">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="RentPaymentDetails">
+        <PropertyRef Name="payment_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_RentPaymentDetails_Rent">
+    <End Role="Rent" Type="Self.Rent" Multiplicity="1" />
+    <End Role="RentPaymentDetails" Type="Self.RentPaymentDetails" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Rent">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="RentPaymentDetails">
+        <PropertyRef Name="rent_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_RentPaymentDetails_ResidentialUnits">
+    <End Role="ResidentialUnits" Type="Self.ResidentialUnits" Multiplicity="1" />
+    <End Role="RentPaymentDetails" Type="Self.RentPaymentDetails" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ResidentialUnits">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="RentPaymentDetails">
+        <PropertyRef Name="unit_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_RentPaymentDetails_Tenant">
+    <End Role="Tenant" Type="Self.Tenant" Multiplicity="1" />
+    <End Role="RentPaymentDetails" Type="Self.RentPaymentDetails" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Tenant">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="RentPaymentDetails">
+        <PropertyRef Name="tenant_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ResidentialUnits_Owner">
+    <End Role="Owner" Type="Self.Owner" Multiplicity="1" />
+    <End Role="ResidentialUnits" Type="Self.ResidentialUnits" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Owner">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="ResidentialUnits">
+        <PropertyRef Name="owner_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Security_ResidentialUnits">
+    <End Role="ResidentialUnits" Type="Self.ResidentialUnits" Multiplicity="1" />
+    <End Role="SecurityOfficer" Type="Self.SecurityOfficer" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ResidentialUnits">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="SecurityOfficer">
+        <PropertyRef Name="unit_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_unit_id">
+    <End Role="ResidentialUnits" Type="Self.ResidentialUnits" Multiplicity="1" />
+    <End Role="Maintenance" Type="Self.Maintenance" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ResidentialUnits">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="Maintenance">
+        <PropertyRef Name="unit_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_UserRole_AppRole">
+    <End Role="AppRole" Type="Self.AppRole" Multiplicity="1" />
+    <End Role="UserRole" Type="Self.UserRole" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AppRole">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="UserRole">
+        <PropertyRef Name="role_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_UserRole_userdata">
+    <End Role="UserData" Type="Self.UserData" Multiplicity="1" />
+    <End Role="UserRole" Type="Self.UserRole" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="UserData">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="UserRole">
+        <PropertyRef Name="user_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="tenant_id">
+    <End Role="Tenant" Type="Self.Tenant" Multiplicity="1" />
+    <End Role="Rent" Type="Self.Rent" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Tenant">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="Rent">
+        <PropertyRef Name="tenant_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="unit_id">
+    <End Role="ResidentialUnits" Type="Self.ResidentialUnits" Multiplicity="1" />
+    <End Role="Rent" Type="Self.Rent" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ResidentialUnits">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="Rent">
+        <PropertyRef Name="unit_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Function Name="fn_diagramobjects" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="int" />
+  <Function Name="sp_alterdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+    <Parameter Name="owner_id" Type="int" Mode="In" />
+    <Parameter Name="version" Type="int" Mode="In" />
+    <Parameter Name="definition" Type="varbinary(max)" Mode="In" />
+  </Function>
+  <Function Name="sp_creatediagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+    <Parameter Name="owner_id" Type="int" Mode="In" />
+    <Parameter Name="version" Type="int" Mode="In" />
+    <Parameter Name="definition" Type="varbinary(max)" Mode="In" />
+  </Function>
+  <Function Name="sp_dropdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+    <Parameter Name="owner_id" Type="int" Mode="In" />
+  </Function>
+  <Function Name="sp_helpdiagramdefinition" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+    <Parameter Name="owner_id" Type="int" Mode="In" />
+  </Function>
+  <Function Name="sp_helpdiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+    <Parameter Name="owner_id" Type="int" Mode="In" />
+  </Function>
+  <Function Name="sp_renamediagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+    <Parameter Name="owner_id" Type="int" Mode="In" />
+    <Parameter Name="new_diagramname" Type="nvarchar" Mode="In" />
+  </Function>
+  <Function Name="sp_upgraddiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <EntityContainer Name="ModelStoreContainer">
+    <EntitySet Name="AppRole" EntityType="Self.AppRole" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Maintenance" EntityType="Self.Maintenance" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Owner" EntityType="Self.Owner" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Payment" EntityType="Self.Payment" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Rent" EntityType="Self.Rent" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="RentPaymentDetails" EntityType="Self.RentPaymentDetails" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ResidentialUnits" EntityType="Self.ResidentialUnits" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="SecurityOfficer" EntityType="Self.SecurityOfficer" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Tenant" EntityType="Self.Tenant" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="UserData" EntityType="Self.UserData" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="UserLog" EntityType="Self.UserLog" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="UserRole" EntityType="Self.UserRole" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_Payment_Payment_tenant" Association="Self.FK_Payment_Payment_tenant">
+      <End Role="Tenant" EntitySet="Tenant" />
+      <End Role="Payment" EntitySet="Payment" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Payment_Payment_unit" Association="Self.FK_Payment_Payment_unit">
+      <End Role="ResidentialUnits" EntitySet="ResidentialUnits" />
+      <End Role="Payment" EntitySet="Payment" />
+    </AssociationSet>
+    <AssociationSet Name="FK_RentPaymentDetails_Payment" Association="Self.FK_RentPaymentDetails_Payment">
+      <End Role="Payment" EntitySet="Payment" />
+      <End Role="RentPaymentDetails" EntitySet="RentPaymentDetails" />
+    </AssociationSet>
+    <AssociationSet Name="FK_RentPaymentDetails_Rent" Association="Self.FK_RentPaymentDetails_Rent">
+      <End Role="Rent" EntitySet="Rent" />
+      <End Role="RentPaymentDetails" EntitySet="RentPaymentDetails" />
+    </AssociationSet>
+    <AssociationSet Name="FK_RentPaymentDetails_ResidentialUnits" Association="Self.FK_RentPaymentDetails_ResidentialUnits">
+      <End Role="ResidentialUnits" EntitySet="ResidentialUnits" />
+      <End Role="RentPaymentDetails" EntitySet="RentPaymentDetails" />
+    </AssociationSet>
+    <AssociationSet Name="FK_RentPaymentDetails_Tenant" Association="Self.FK_RentPaymentDetails_Tenant">
+      <End Role="Tenant" EntitySet="Tenant" />
+      <End Role="RentPaymentDetails" EntitySet="RentPaymentDetails" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ResidentialUnits_Owner" Association="Self.FK_ResidentialUnits_Owner">
+      <End Role="Owner" EntitySet="Owner" />
+      <End Role="ResidentialUnits" EntitySet="ResidentialUnits" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Security_ResidentialUnits" Association="Self.FK_Security_ResidentialUnits">
+      <End Role="ResidentialUnits" EntitySet="ResidentialUnits" />
+      <End Role="SecurityOfficer" EntitySet="SecurityOfficer" />
+    </AssociationSet>
+    <AssociationSet Name="FK_unit_id" Association="Self.FK_unit_id">
+      <End Role="ResidentialUnits" EntitySet="ResidentialUnits" />
+      <End Role="Maintenance" EntitySet="Maintenance" />
+    </AssociationSet>
+    <AssociationSet Name="FK_UserRole_AppRole" Association="Self.FK_UserRole_AppRole">
+      <End Role="AppRole" EntitySet="AppRole" />
+      <End Role="UserRole" EntitySet="UserRole" />
+    </AssociationSet>
+    <AssociationSet Name="FK_UserRole_userdata" Association="Self.FK_UserRole_userdata">
+      <End Role="UserData" EntitySet="UserData" />
+      <End Role="UserRole" EntitySet="UserRole" />
+    </AssociationSet>
+    <AssociationSet Name="tenant_id" Association="Self.tenant_id">
+      <End Role="Tenant" EntitySet="Tenant" />
+      <End Role="Rent" EntitySet="Rent" />
+    </AssociationSet>
+    <AssociationSet Name="unit_id" Association="Self.unit_id">
+      <End Role="ResidentialUnits" EntitySet="ResidentialUnits" />
+      <End Role="Rent" EntitySet="Rent" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="81259b7c8933422abf7d175e87694afd" Name="Diagram1" ZoomLevel="74">
+        <EntityTypeShape EntityType="ThakshilawaModel.AccessLevel" Width="1.5" PointX="3.75" PointY="9.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="ThakshilawaModel.AccessLevelUser" Width="1.5" PointX="6" PointY="12" IsExpanded="true" />
+        <EntityTypeShape EntityType="ThakshilawaModel.ClassRoom" Width="1.5" PointX="8.25" PointY="11.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="ThakshilawaModel.Enrollment" Width="1.5" PointX="10.5" PointY="16" IsExpanded="true" />
+        <EntityTypeShape EntityType="ThakshilawaModel.Lecture" Width="1.5" PointX="3" PointY="11.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="ThakshilawaModel.Payment" Width="1.5" PointX="12.75" PointY="13.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="ThakshilawaModel.SellingItem" Width="1.5" PointX="3" PointY="14.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="ThakshilawaModel.SellingItemInvoice" Width="1.5" PointX="3" PointY="17.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ThakshilawaModel.SellingItemInvoiceDetail" Width="1.5" PointX="5.25" PointY="16.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="ThakshilawaModel.Student" Width="1.5" PointX="3" PointY="21.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="ThakshilawaModel.sysdiagram" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ThakshilawaModel.UserData" Width="1.5" PointX="0.75" PointY="10.75" IsExpanded="true" />
+        <AssociationConnector Association="ThakshilawaModel.FK_AccessLevelUser_AccessLevel" ManuallyRouted="false" />
+        <AssociationConnector Association="ThakshilawaModel.FK_AccessLevelUser_UserData" ManuallyRouted="false" />
+        <AssociationConnector Association="ThakshilawaModel.FK_Class_Lecture" ManuallyRouted="false" />
+        <AssociationConnector Association="ThakshilawaModel.FK_Class_UserData" ManuallyRouted="false" />
+        <AssociationConnector Association="ThakshilawaModel.FK_Enrollment_Class" ManuallyRouted="false" />
+        <AssociationConnector Association="ThakshilawaModel.FK_Enrollment_Student" ManuallyRouted="false" />
+        <AssociationConnector Association="ThakshilawaModel.FK_Enrollment_UserData" ManuallyRouted="false" />
+        <AssociationConnector Association="ThakshilawaModel.FK_Payment_Enrollment" ManuallyRouted="false" />
+        <AssociationConnector Association="ThakshilawaModel.FK_Lecture_UserData" ManuallyRouted="false" />
+        <AssociationConnector Association="ThakshilawaModel.FK_Lecture_UserData1" ManuallyRouted="false" />
+        <AssociationConnector Association="ThakshilawaModel.FK_Payment_UserData" ManuallyRouted="false" />
+        <AssociationConnector Association="ThakshilawaModel.FK_SellingItem_UserData" ManuallyRouted="false" />
+        <AssociationConnector Association="ThakshilawaModel.FK_SellingItemInvoiceDetail_SellingItem" ManuallyRouted="false" />
+        <AssociationConnector Association="ThakshilawaModel.FK_SellingItemInvoice_UserData" ManuallyRouted="false" />
+        <AssociationConnector Association="ThakshilawaModel.FK_SellingItemInvoiceDetail_SellingItemInvoice" ManuallyRouted="false" />
+        <AssociationConnector Association="ThakshilawaModel.FK_Student_UserData" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="ThakshilawaModel.StudentAttendance" Width="1.5" PointX="8.25" PointY="16.375" />
+        <AssociationConnector Association="ThakshilawaModel.FK_StudentAttendance_Student1" />
+        <AssociationConnector Association="ThakshilawaModel.FK_StudentAttendance_Student" />
+        <EntityTypeShape EntityType="ThakshilawaModel.UserAttendance" Width="1.5" PointX="3" PointY="5.875" />
+        <AssociationConnector Association="ThakshilawaModel.FK_UserAttendance_UserData" />
+        <AssociationConnector Association="ThakshilawaModel.FK_UserAttendance_UserData1" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

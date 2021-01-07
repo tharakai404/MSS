@@ -1,0 +1,229 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="OLMModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="AppRole">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Role" Type="nvarchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="appUser">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="username" Type="varchar(max)" />
+    <Property Name="password" Type="varchar(max)" />
+    <Property Name="type" Type="varchar(max)" />
+  </EntityType>
+  <EntityType Name="customer">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="name" Type="varchar(max)" Nullable="false" />
+    <Property Name="mobile" Type="varchar(max)" Nullable="false" />
+    <Property Name="address" Type="varchar(max)" Nullable="false" />
+    <Property Name="email" Type="varchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="customerOrder">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="customerId" Type="int" Nullable="false" />
+    <Property Name="date" Type="date" Nullable="false" />
+    <Property Name="deliverDate" Type="date" Nullable="false" />
+    <Property Name="total" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+    <Property Name="status" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="remarks" Type="nvarchar(max)" />
+  </EntityType>
+  <EntityType Name="customerOrderDTL">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="customerOrderId" Type="int" />
+    <Property Name="serviceId" Type="int" />
+    <Property Name="qty" Type="int" />
+    <Property Name="wash" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="Iron" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="dryclean" Type="decimal" Precision="18" Scale="2" />
+  </EntityType>
+  <EntityType Name="payment">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" Nullable="false" />
+    <Property Name="customerOrderId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="amount" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+    <Property Name="type" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="service">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="service" Type="varchar(max)" Nullable="false" />
+    <Property Name="description" Type="varchar(max)" Nullable="false" />
+    <Property Name="wash" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+    <Property Name="IronRate" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+    <Property Name="dryclean" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+  </EntityType>
+  <EntityType Name="sysdiagrams">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="principal_id" Type="int" Nullable="false" />
+    <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="version" Type="int" />
+    <Property Name="definition" Type="varbinary(max)" />
+  </EntityType>
+  <EntityType Name="userandrole">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="appuserid" Type="int" Nullable="false" />
+    <Property Name="approleid" Type="int" Nullable="false" />
+  </EntityType>
+  <Association Name="FK_customerOrder_customer">
+    <End Role="customer" Type="Self.customer" Multiplicity="1" />
+    <End Role="customerOrder" Type="Self.customerOrder" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="customer">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="customerOrder">
+        <PropertyRef Name="customerId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_customerOrderDTL_customerOrder">
+    <End Role="customerOrder" Type="Self.customerOrder" Multiplicity="0..1" />
+    <End Role="customerOrderDTL" Type="Self.customerOrderDTL" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="customerOrder">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="customerOrderDTL">
+        <PropertyRef Name="customerOrderId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_customerOrderDTL_service">
+    <End Role="service" Type="Self.service" Multiplicity="0..1" />
+    <End Role="customerOrderDTL" Type="Self.customerOrderDTL" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="service">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="customerOrderDTL">
+        <PropertyRef Name="serviceId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_payment_customerOrder">
+    <End Role="customerOrder" Type="Self.customerOrder" Multiplicity="1" />
+    <End Role="payment" Type="Self.payment" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="customerOrder">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="payment">
+        <PropertyRef Name="customerOrderId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_userandrole_AppRole">
+    <End Role="AppRole" Type="Self.AppRole" Multiplicity="1" />
+    <End Role="userandrole" Type="Self.userandrole" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AppRole">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="userandrole">
+        <PropertyRef Name="approleid" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_userandrole_appUser">
+    <End Role="appUser" Type="Self.appUser" Multiplicity="1" />
+    <End Role="userandrole" Type="Self.userandrole" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="appUser">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="userandrole">
+        <PropertyRef Name="appuserid" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Function Name="fn_diagramobjects" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="int" />
+  <Function Name="sp_alterdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+    <Parameter Name="owner_id" Type="int" Mode="In" />
+    <Parameter Name="version" Type="int" Mode="In" />
+    <Parameter Name="definition" Type="varbinary(max)" Mode="In" />
+  </Function>
+  <Function Name="sp_creatediagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+    <Parameter Name="owner_id" Type="int" Mode="In" />
+    <Parameter Name="version" Type="int" Mode="In" />
+    <Parameter Name="definition" Type="varbinary(max)" Mode="In" />
+  </Function>
+  <Function Name="sp_dropdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+    <Parameter Name="owner_id" Type="int" Mode="In" />
+  </Function>
+  <Function Name="sp_helpdiagramdefinition" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+    <Parameter Name="owner_id" Type="int" Mode="In" />
+  </Function>
+  <Function Name="sp_helpdiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+    <Parameter Name="owner_id" Type="int" Mode="In" />
+  </Function>
+  <Function Name="sp_renamediagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+    <Parameter Name="owner_id" Type="int" Mode="In" />
+    <Parameter Name="new_diagramname" Type="nvarchar" Mode="In" />
+  </Function>
+  <Function Name="sp_upgraddiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <EntityContainer Name="OLMModelStoreContainer">
+    <EntitySet Name="AppRole" EntityType="Self.AppRole" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="appUser" EntityType="Self.appUser" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="customer" EntityType="Self.customer" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="customerOrder" EntityType="Self.customerOrder" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="customerOrderDTL" EntityType="Self.customerOrderDTL" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="payment" EntityType="Self.payment" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="service" EntityType="Self.service" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="userandrole" EntityType="Self.userandrole" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_customerOrder_customer" Association="Self.FK_customerOrder_customer">
+      <End Role="customer" EntitySet="customer" />
+      <End Role="customerOrder" EntitySet="customerOrder" />
+    </AssociationSet>
+    <AssociationSet Name="FK_customerOrderDTL_customerOrder" Association="Self.FK_customerOrderDTL_customerOrder">
+      <End Role="customerOrder" EntitySet="customerOrder" />
+      <End Role="customerOrderDTL" EntitySet="customerOrderDTL" />
+    </AssociationSet>
+    <AssociationSet Name="FK_customerOrderDTL_service" Association="Self.FK_customerOrderDTL_service">
+      <End Role="service" EntitySet="service" />
+      <End Role="customerOrderDTL" EntitySet="customerOrderDTL" />
+    </AssociationSet>
+    <AssociationSet Name="FK_payment_customerOrder" Association="Self.FK_payment_customerOrder">
+      <End Role="customerOrder" EntitySet="customerOrder" />
+      <End Role="payment" EntitySet="payment" />
+    </AssociationSet>
+    <AssociationSet Name="FK_userandrole_AppRole" Association="Self.FK_userandrole_AppRole">
+      <End Role="AppRole" EntitySet="AppRole" />
+      <End Role="userandrole" EntitySet="userandrole" />
+    </AssociationSet>
+    <AssociationSet Name="FK_userandrole_appUser" Association="Self.FK_userandrole_appUser">
+      <End Role="appUser" EntitySet="appUser" />
+      <End Role="userandrole" EntitySet="userandrole" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

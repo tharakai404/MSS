@@ -1,0 +1,187 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="ThakshilawaModelStoreContainer" CdmEntityContainer="ThakshilawaEntities2">
+    <EntitySetMapping Name="AccessLevels">
+      <EntityTypeMapping TypeName="ThakshilawaModel.AccessLevel">
+        <MappingFragment StoreEntitySet="AccessLevel">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="access" ColumnName="access" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="AccessLevelUsers">
+      <EntityTypeMapping TypeName="ThakshilawaModel.AccessLevelUser">
+        <MappingFragment StoreEntitySet="AccessLevelUser">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="accesslevelid" ColumnName="accesslevelid" />
+          <ScalarProperty Name="userid" ColumnName="userid" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ClassRooms">
+      <EntityTypeMapping TypeName="ThakshilawaModel.ClassRoom">
+        <MappingFragment StoreEntitySet="ClassRoom">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="commencementdate" ColumnName="commencementdate" />
+          <ScalarProperty Name="maxstudent" ColumnName="maxstudent" />
+          <ScalarProperty Name="coursefee" ColumnName="coursefee" />
+          <ScalarProperty Name="createdby" ColumnName="createdby" />
+          <ScalarProperty Name="lectureid" ColumnName="lectureid" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Enrollments">
+      <EntityTypeMapping TypeName="ThakshilawaModel.Enrollment">
+        <MappingFragment StoreEntitySet="Enrollment">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="studentid" ColumnName="studentid" />
+          <ScalarProperty Name="classid" ColumnName="classid" />
+          <ScalarProperty Name="date" ColumnName="date" />
+          <ScalarProperty Name="createdby" ColumnName="createdby" />
+          <ScalarProperty Name="paymentdone" ColumnName="paymentdone" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Lectures">
+      <EntityTypeMapping TypeName="ThakshilawaModel.Lecture">
+        <MappingFragment StoreEntitySet="Lecture">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="userid" ColumnName="userid" />
+          <ScalarProperty Name="createdby" ColumnName="createdby" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Payments">
+      <EntityTypeMapping TypeName="ThakshilawaModel.Payment">
+        <MappingFragment StoreEntitySet="Payment">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="enrolementid" ColumnName="enrolementid" />
+          <ScalarProperty Name="amount" ColumnName="amount" />
+          <ScalarProperty Name="type" ColumnName="type" />
+          <ScalarProperty Name="date" ColumnName="date" />
+          <ScalarProperty Name="createdby" ColumnName="createdby" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="SellingItems">
+      <EntityTypeMapping TypeName="ThakshilawaModel.SellingItem">
+        <MappingFragment StoreEntitySet="SellingItem">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="itemname" ColumnName="itemname" />
+          <ScalarProperty Name="sellingrate" ColumnName="sellingrate" />
+          <ScalarProperty Name="buyingrate" ColumnName="buyingrate" />
+          <ScalarProperty Name="qty" ColumnName="qty" />
+          <ScalarProperty Name="createdby" ColumnName="createdby" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="SellingItemInvoices">
+      <EntityTypeMapping TypeName="ThakshilawaModel.SellingItemInvoice">
+        <MappingFragment StoreEntitySet="SellingItemInvoice">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="date" ColumnName="date" />
+          <ScalarProperty Name="description" ColumnName="description" />
+          <ScalarProperty Name="amount" ColumnName="amount" />
+          <ScalarProperty Name="paytype" ColumnName="paytype" />
+          <ScalarProperty Name="createdby" ColumnName="createdby" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="SellingItemInvoiceDetails">
+      <EntityTypeMapping TypeName="ThakshilawaModel.SellingItemInvoiceDetail">
+        <MappingFragment StoreEntitySet="SellingItemInvoiceDetail">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="sellingiteminvoiceid" ColumnName="sellingiteminvoiceid" />
+          <ScalarProperty Name="sellingitemid" ColumnName="sellingitemid" />
+          <ScalarProperty Name="rate" ColumnName="rate" />
+          <ScalarProperty Name="qty" ColumnName="qty" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Students">
+      <EntityTypeMapping TypeName="ThakshilawaModel.Student">
+        <MappingFragment StoreEntitySet="Student">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="nic" ColumnName="nic" />
+          <ScalarProperty Name="address" ColumnName="address" />
+          <ScalarProperty Name="regdate" ColumnName="regdate" />
+          <ScalarProperty Name="regid" ColumnName="regid" />
+          <ScalarProperty Name="createdby" ColumnName="createdby" />
+          <ScalarProperty Name="mobile" ColumnName="mobile" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="sysdiagrams">
+      <EntityTypeMapping TypeName="ThakshilawaModel.sysdiagram">
+        <MappingFragment StoreEntitySet="sysdiagrams">
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+          <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+          <ScalarProperty Name="version" ColumnName="version" />
+          <ScalarProperty Name="definition" ColumnName="definition" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="UserDatas">
+      <EntityTypeMapping TypeName="ThakshilawaModel.UserData">
+        <MappingFragment StoreEntitySet="UserData">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="userid" ColumnName="userid" />
+          <ScalarProperty Name="password" ColumnName="password" />
+          <ScalarProperty Name="mobile" ColumnName="mobile" />
+          <ScalarProperty Name="email" ColumnName="email" />
+          <ScalarProperty Name="type" ColumnName="type" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <FunctionImportMapping FunctionImportName="sp_alterdiagram" FunctionName="ThakshilawaModel.Store.sp_alterdiagram" />
+    <FunctionImportMapping FunctionImportName="sp_creatediagram" FunctionName="ThakshilawaModel.Store.sp_creatediagram" />
+    <FunctionImportMapping FunctionImportName="sp_dropdiagram" FunctionName="ThakshilawaModel.Store.sp_dropdiagram" />
+    <FunctionImportMapping FunctionImportName="sp_helpdiagramdefinition" FunctionName="ThakshilawaModel.Store.sp_helpdiagramdefinition">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="ThakshilawaModel.sp_helpdiagramdefinition_Result">
+          <ScalarProperty Name="version" ColumnName="version" />
+          <ScalarProperty Name="definition" ColumnName="definition" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="sp_helpdiagrams" FunctionName="ThakshilawaModel.Store.sp_helpdiagrams">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="ThakshilawaModel.sp_helpdiagrams_Result">
+          <ScalarProperty Name="Database" ColumnName="Database" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="Owner" ColumnName="Owner" />
+          <ScalarProperty Name="OwnerID" ColumnName="OwnerID" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="sp_renamediagram" FunctionName="ThakshilawaModel.Store.sp_renamediagram" />
+    <FunctionImportMapping FunctionImportName="sp_upgraddiagrams" FunctionName="ThakshilawaModel.Store.sp_upgraddiagrams" />
+    <EntitySetMapping Name="StudentAttendances">
+      <EntityTypeMapping TypeName="ThakshilawaModel.StudentAttendance">
+        <MappingFragment StoreEntitySet="StudentAttendance">
+          <ScalarProperty Name="createdby" ColumnName="createdby" />
+          <ScalarProperty Name="studentid" ColumnName="studentid" />
+          <ScalarProperty Name="inout" ColumnName="inout" />
+          <ScalarProperty Name="date" ColumnName="date" />
+          <ScalarProperty Name="id" ColumnName="id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="UserAttendances">
+      <EntityTypeMapping TypeName="ThakshilawaModel.UserAttendance">
+        <MappingFragment StoreEntitySet="UserAttendance">
+          <ScalarProperty Name="createdby" ColumnName="createdby" />
+          <ScalarProperty Name="userid" ColumnName="userid" />
+          <ScalarProperty Name="inout" ColumnName="inout" />
+          <ScalarProperty Name="date" ColumnName="date" />
+          <ScalarProperty Name="id" ColumnName="id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

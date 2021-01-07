@@ -1,0 +1,59 @@
+﻿@model ABC.service
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>service</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.service1)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.service1)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.description)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.description)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.wash)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.wash)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.IronRate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.IronRate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.dryclean)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.dryclean)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

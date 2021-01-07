@@ -1,0 +1,62 @@
+﻿@model ABC.Student
+
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <h4>Student</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group">
+
+            <label class="control-label col-md-2" for=""> Student Name or NIC</label>
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.name, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.name, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="button" id="Submit" value="Search" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
+
+
+<div id="summary-panel"></div>
+
+<script>
+
+    $('#Submit').click(function ()
+    {
+        myfunction();
+    });
+    myfunction();
+
+    function myfunction() {
+         $.ajax(
+                {
+                    url: '@Url.Action("Index", "Students")',
+                    data: { name: $("#name").val() /* add other additional parameters */ },
+                    cache: false,
+                    type: 'post',
+                    dataType: "html",
+                    success: successFunc,
+                    error: errorFunc
+                });
+
+                function successFunc(data)
+                {
+                   $("#summary-panel").html(data);
+                }
+
+                function errorFunc(error)
+                {
+                    alert('MVC controller call failed.');
+                }
+    }
+</script>

@@ -1,0 +1,154 @@
+﻿@model IEnumerable<ABC.service>
+
+@{
+    Layout = "~/Views/Shared/_Layout2.cshtml";
+
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    @Scripts.Render("~/bundles/jquery")
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+    <style>
+        body {
+        }
+
+        h1 {
+            color: blue;
+        }
+
+        p {
+            color: red;
+        }
+
+        .itembox {
+            height: 250px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            padding: 5px;
+            margin: 10px;
+            width: 265px;
+            float: left;
+        }
+
+            .itembox:hover {
+                box-shadow: 0 0 2px 1px rgba(0, 140, 186, 0.5);
+            }
+        .button {
+            background-color: #008CBA; /* Green */
+            border: none;
+            color: white;
+            padding: 0px 10px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 4px 2px;
+            cursor: pointer;
+            width: 250px;
+            height: 60px;
+        }
+
+    </style>
+</head>
+<body>
+   
+
+
+    <div style="float: left;">
+
+        @foreach (var item in Model)
+        {
+        <div class="itembox" id="@Html.DisplayFor(modelItem => item.id)" style="background-image: url('http://www.washapp.lk/images/product/Blazer_press.jpg')">
+            <div class="product-price">
+                <table>
+                    <tr>
+                        <td>
+                            Qty
+                        </td>
+                        <td>
+                            <input type="number" id="qty" name="qty" min="1" value="1" style="width: 75px; height: 50px; font-size: 31px; padding: 10px; margin: 5px;">
+                        </td>
+
+                        <td>
+                            Wash Rs.@Html.DisplayFor(modelItem => item.wash)  <input type="checkbox" id="WashCheck" name="WashCheck" value="Wash"> <br>
+                            Iron Rate Rs.@Html.DisplayFor(modelItem => item.IronRate)  <input type="checkbox" id="IronCheck" name="IronCheck" value="Iron"> <br>
+                            Dry clean Rs.@Html.DisplayFor(modelItem => item.dryclean)  <input type="checkbox" id="DrycleanCheck" name="DrycleanCheck" value="Dryclean">
+                        </td>
+                    </tr>
+                </table>
+               
+
+            </div>
+                <div class="product-content pc-eqh" style="height: 123px;"  onclick="addToCart(this)">
+                    <h3> @Html.DisplayFor(modelItem => item.service1)</h3>
+                    <div class="product-std" style="height: 45px;"> @Html.DisplayFor(modelItem => item.description) </div>
+                    <div class="product-cart-block">
+                        <div class="product-cart disable-select button">
+                            <br>
+                            <span class="cart-number">Add to Cart</span>
+                        </div>
+                    </div>
+                </div>
+            
+
+        </div>
+        }
+    </div>
+</body>
+</html>
+<script>
+    function addToCart(element) {
+        element = element.parentElement;
+        var els = element.querySelectorAll("input[type='checkbox']:checked");
+        var qty = element.querySelectorAll("input[type='number']")[0].value;
+        var Wash = false, Iron = false, Dryclean = false;
+        for (var i = 0; i < els.length; i++) {
+            if (els[i].value=="Wash") {
+                Wash = true;
+            }
+            if (els[i].value == "Iron") {
+                Iron = true;
+            }
+            if (els[i].value == "Dryclean") {
+                Dryclean = true;
+            }
+         //   alert(els[i].value);
+        }
+        if (Wash == false && Iron == false && Dryclean == false) {
+            alert("Please tick service type first. ");
+            return;
+        }
+        myfunction(element.id,qty, Wash, Iron, Dryclean);
+    }
+
+    function myfunction(id,qty, Wash, Iron, Dryclean) {
+         $.ajax(
+                {
+                    url: '@Url.Action("AddToCart", "Cart")',
+                    data: { id: id,qty: qty, Wash: Wash, Iron: Iron, Dryclean: Dryclean},
+                    cache: false,
+                    type: 'post',
+                    dataType: "html",
+                    success: successFunc,
+                    error: errorFunc
+                });
+
+                function successFunc(data)
+                {
+
+                    alert(data);
+                  // $("#summary-panel").html(data);
+                }
+
+                function errorFunc(error)
+                {
+                    alert('MVC controller call failed.');
+                }
+    }
+</script>
+
+

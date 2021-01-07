@@ -1,0 +1,140 @@
+﻿@model IEnumerable<ABC.SellingItem>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Point Of Sale</h2>
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.itemname)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.sellingrate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.buyingrate)
+        </th>
+        <th>
+            Add to Bill
+        </th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.itemname)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.sellingrate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.buyingrate)
+            </td>
+            <td>
+               
+                <div>
+                    <input type="number"id="@Html.DisplayFor(modelItem => item.id)" name="qty" min="1" value="1" style="width: 75px; ">
+                    <input type="checkbox" id="add" name="add" id="@Html.DisplayFor(modelItem => item.id)">
+                </div>
+            </td>
+
+        </tr>
+    }
+
+<tr>
+    <td>
+        <label for="cars">Choose a Pay mode:</label>
+    </td>
+    <td>
+        <select name="pay" id="pay">
+            <option value="cash">Cash</option>
+            <option value="card">Card</option>
+        </select>
+    </td>
+   
+
+</tr>
+
+</table>
+<button style="height: 40px;color: black;" onclick="myfunction(this)">
+    <span class="cart-number">Genarate Bill</span>
+</button>
+
+<script>
+
+
+    function myfunction(element) {
+        debugger;
+        jsonObjMain = [];
+        jsonObj = [];
+        element = element.parentElement;
+        var els = element.querySelectorAll("input[type='checkbox']:checked");
+
+        if (els.length == 0) {
+            alert("Please Select items");
+
+        } else {
+            for (var i = 0; i < els.length; i++) {
+
+                var a = els[i].parentElement;
+                var qty = a.querySelectorAll("input[type='number']")[0].value;
+                var itemid = a.querySelectorAll("input[type='number']")[0].id;
+
+
+                SellingItemInvoiceDetail = {}
+                SellingItemInvoiceDetail["sellingitemid"] = itemid;
+                SellingItemInvoiceDetail["qty"] = qty;
+
+                jsonObj.push(SellingItemInvoiceDetail);
+
+
+
+            }
+            console.log(jsonObj);
+
+            SellingItemInvoice = {}
+            SellingItemInvoice["SellingItemInvoiceDetails"] = jsonObj;
+            SellingItemInvoice["paytype"] = $("#pay").val();
+            myfunction1(SellingItemInvoice);
+
+        }
+
+        
+
+    }
+
+    function myfunction1(jsonString) {
+
+
+        $.ajax(
+                {
+                    url: '@Url.Action("Bill", "POS")',
+                data: { inv: jsonString},
+                    cache: false,
+                    type: 'post',
+                    dataType: "html",
+                    success: successFunc,
+                    error: errorFunc
+                });
+
+                function successFunc(data)
+                {
+
+                    //alert(data);
+                    // $("#summary-panel").html(data); 
+                    window.location = "pos/print/" + data;
+                }
+
+                function errorFunc(error)
+                {
+                    alert('MVC controller call failed.');
+                }
+    }
+
+
+</script>

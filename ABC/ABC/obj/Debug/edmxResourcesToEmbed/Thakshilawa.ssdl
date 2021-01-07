@@ -1,0 +1,514 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="ThakshilawaModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="AccessLevel">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="access" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="AccessLevelUser">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="accesslevelid" Type="int" Nullable="false" />
+    <Property Name="userid" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="ClassRoom">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="name" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="commencementdate" Type="date" Nullable="false" />
+    <Property Name="maxstudent" Type="int" Nullable="false" />
+    <Property Name="coursefee" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+    <Property Name="createdby" Type="int" Nullable="false" />
+    <Property Name="lectureid" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Enrollment">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="studentid" Type="int" Nullable="false" />
+    <Property Name="classid" Type="int" Nullable="false" />
+    <Property Name="date" Type="date" Nullable="false" />
+    <Property Name="createdby" Type="int" Nullable="false" />
+    <Property Name="paymentdone" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Lecture">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="userid" Type="int" Nullable="false" />
+    <Property Name="createdby" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Payment">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="enrolementid" Type="int" Nullable="false" />
+    <Property Name="amount" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+    <Property Name="type" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="date" Type="date" Nullable="false" />
+    <Property Name="createdby" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="SellingItem">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="itemname" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="sellingrate" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+    <Property Name="buyingrate" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+    <Property Name="qty" Type="int" Nullable="false" />
+    <Property Name="createdby" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="SellingItemInvoice">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="date" Type="date" Nullable="false" />
+    <Property Name="description" Type="nvarchar(max)" />
+    <Property Name="amount" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+    <Property Name="paytype" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="createdby" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="SellingItemInvoiceDetail">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="sellingiteminvoiceid" Type="int" Nullable="false" />
+    <Property Name="sellingitemid" Type="int" Nullable="false" />
+    <Property Name="rate" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+    <Property Name="qty" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Student">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="name" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="nic" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="address" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="regdate" Type="date" Nullable="false" />
+    <Property Name="regid" Type="nvarchar(max)" />
+    <Property Name="createdby" Type="int" Nullable="false" />
+    <Property Name="mobile" Type="nvarchar(max)" />
+  </EntityType>
+  <EntityType Name="StudentAttendance">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="date" Type="datetime" Nullable="false" />
+    <Property Name="inout" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="studentid" Type="int" Nullable="false" />
+    <Property Name="createdby" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="sysdiagrams">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="principal_id" Type="int" Nullable="false" />
+    <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="version" Type="int" />
+    <Property Name="definition" Type="varbinary(max)" />
+  </EntityType>
+  <EntityType Name="UserAttendance">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="date" Type="datetime" Nullable="false" />
+    <Property Name="inout" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="userid" Type="int" Nullable="false" />
+    <Property Name="createdby" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="UserData">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="name" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="userid" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="password" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="mobile" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="email" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="type" Type="nvarchar(max)" />
+  </EntityType>
+  <Association Name="FK_AccessLevelUser_AccessLevel">
+    <End Role="AccessLevel" Type="Self.AccessLevel" Multiplicity="1" />
+    <End Role="AccessLevelUser" Type="Self.AccessLevelUser" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AccessLevel">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="AccessLevelUser">
+        <PropertyRef Name="accesslevelid" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_AccessLevelUser_UserData">
+    <End Role="UserData" Type="Self.UserData" Multiplicity="1" />
+    <End Role="AccessLevelUser" Type="Self.AccessLevelUser" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="UserData">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="AccessLevelUser">
+        <PropertyRef Name="userid" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Class_Lecture">
+    <End Role="Lecture" Type="Self.Lecture" Multiplicity="1" />
+    <End Role="ClassRoom" Type="Self.ClassRoom" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Lecture">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="ClassRoom">
+        <PropertyRef Name="lectureid" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Class_UserData">
+    <End Role="UserData" Type="Self.UserData" Multiplicity="1" />
+    <End Role="ClassRoom" Type="Self.ClassRoom" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="UserData">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="ClassRoom">
+        <PropertyRef Name="createdby" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Enrollment_Class">
+    <End Role="ClassRoom" Type="Self.ClassRoom" Multiplicity="1" />
+    <End Role="Enrollment" Type="Self.Enrollment" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ClassRoom">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="Enrollment">
+        <PropertyRef Name="classid" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Enrollment_Student">
+    <End Role="Student" Type="Self.Student" Multiplicity="1" />
+    <End Role="Enrollment" Type="Self.Enrollment" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Student">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="Enrollment">
+        <PropertyRef Name="studentid" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Enrollment_UserData">
+    <End Role="UserData" Type="Self.UserData" Multiplicity="1" />
+    <End Role="Enrollment" Type="Self.Enrollment" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="UserData">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="Enrollment">
+        <PropertyRef Name="createdby" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Lecture_UserData">
+    <End Role="UserData" Type="Self.UserData" Multiplicity="1" />
+    <End Role="Lecture" Type="Self.Lecture" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="UserData">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="Lecture">
+        <PropertyRef Name="userid" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Lecture_UserData1">
+    <End Role="UserData" Type="Self.UserData" Multiplicity="1" />
+    <End Role="Lecture" Type="Self.Lecture" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="UserData">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="Lecture">
+        <PropertyRef Name="createdby" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Payment_Enrollment">
+    <End Role="Enrollment" Type="Self.Enrollment" Multiplicity="1" />
+    <End Role="Payment" Type="Self.Payment" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Enrollment">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="Payment">
+        <PropertyRef Name="enrolementid" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Payment_UserData">
+    <End Role="UserData" Type="Self.UserData" Multiplicity="1" />
+    <End Role="Payment" Type="Self.Payment" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="UserData">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="Payment">
+        <PropertyRef Name="createdby" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_SellingItem_UserData">
+    <End Role="UserData" Type="Self.UserData" Multiplicity="1" />
+    <End Role="SellingItem" Type="Self.SellingItem" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="UserData">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="SellingItem">
+        <PropertyRef Name="createdby" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_SellingItemInvoice_UserData">
+    <End Role="UserData" Type="Self.UserData" Multiplicity="1" />
+    <End Role="SellingItemInvoice" Type="Self.SellingItemInvoice" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="UserData">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="SellingItemInvoice">
+        <PropertyRef Name="createdby" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_SellingItemInvoiceDetail_SellingItem">
+    <End Role="SellingItem" Type="Self.SellingItem" Multiplicity="1" />
+    <End Role="SellingItemInvoiceDetail" Type="Self.SellingItemInvoiceDetail" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="SellingItem">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="SellingItemInvoiceDetail">
+        <PropertyRef Name="sellingitemid" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_SellingItemInvoiceDetail_SellingItemInvoice">
+    <End Role="SellingItemInvoice" Type="Self.SellingItemInvoice" Multiplicity="1" />
+    <End Role="SellingItemInvoiceDetail" Type="Self.SellingItemInvoiceDetail" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="SellingItemInvoice">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="SellingItemInvoiceDetail">
+        <PropertyRef Name="sellingiteminvoiceid" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Student_UserData">
+    <End Role="UserData" Type="Self.UserData" Multiplicity="1" />
+    <End Role="Student" Type="Self.Student" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="UserData">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="Student">
+        <PropertyRef Name="createdby" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_StudentAttendance_Student">
+    <End Role="UserData" Type="Self.UserData" Multiplicity="1" />
+    <End Role="StudentAttendance" Type="Self.StudentAttendance" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="UserData">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="StudentAttendance">
+        <PropertyRef Name="createdby" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_StudentAttendance_Student1">
+    <End Role="Student" Type="Self.Student" Multiplicity="1" />
+    <End Role="StudentAttendance" Type="Self.StudentAttendance" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Student">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="StudentAttendance">
+        <PropertyRef Name="studentid" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_UserAttendance_UserData">
+    <End Role="UserData" Type="Self.UserData" Multiplicity="1" />
+    <End Role="UserAttendance" Type="Self.UserAttendance" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="UserData">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="UserAttendance">
+        <PropertyRef Name="createdby" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_UserAttendance_UserData1">
+    <End Role="UserData" Type="Self.UserData" Multiplicity="1" />
+    <End Role="UserAttendance" Type="Self.UserAttendance" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="UserData">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="UserAttendance">
+        <PropertyRef Name="userid" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Function Name="fn_diagramobjects" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="int" />
+  <Function Name="sp_alterdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+    <Parameter Name="owner_id" Type="int" Mode="In" />
+    <Parameter Name="version" Type="int" Mode="In" />
+    <Parameter Name="definition" Type="varbinary(max)" Mode="In" />
+  </Function>
+  <Function Name="sp_creatediagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+    <Parameter Name="owner_id" Type="int" Mode="In" />
+    <Parameter Name="version" Type="int" Mode="In" />
+    <Parameter Name="definition" Type="varbinary(max)" Mode="In" />
+  </Function>
+  <Function Name="sp_dropdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+    <Parameter Name="owner_id" Type="int" Mode="In" />
+  </Function>
+  <Function Name="sp_helpdiagramdefinition" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+    <Parameter Name="owner_id" Type="int" Mode="In" />
+  </Function>
+  <Function Name="sp_helpdiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+    <Parameter Name="owner_id" Type="int" Mode="In" />
+  </Function>
+  <Function Name="sp_renamediagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+    <Parameter Name="owner_id" Type="int" Mode="In" />
+    <Parameter Name="new_diagramname" Type="nvarchar" Mode="In" />
+  </Function>
+  <Function Name="sp_upgraddiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <EntityContainer Name="ThakshilawaModelStoreContainer">
+    <EntitySet Name="AccessLevel" EntityType="Self.AccessLevel" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="AccessLevelUser" EntityType="Self.AccessLevelUser" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ClassRoom" EntityType="Self.ClassRoom" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Enrollment" EntityType="Self.Enrollment" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Lecture" EntityType="Self.Lecture" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Payment" EntityType="Self.Payment" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="SellingItem" EntityType="Self.SellingItem" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="SellingItemInvoice" EntityType="Self.SellingItemInvoice" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="SellingItemInvoiceDetail" EntityType="Self.SellingItemInvoiceDetail" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Student" EntityType="Self.Student" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="StudentAttendance" EntityType="Self.StudentAttendance" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="UserAttendance" EntityType="Self.UserAttendance" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="UserData" EntityType="Self.UserData" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_AccessLevelUser_AccessLevel" Association="Self.FK_AccessLevelUser_AccessLevel">
+      <End Role="AccessLevel" EntitySet="AccessLevel" />
+      <End Role="AccessLevelUser" EntitySet="AccessLevelUser" />
+    </AssociationSet>
+    <AssociationSet Name="FK_AccessLevelUser_UserData" Association="Self.FK_AccessLevelUser_UserData">
+      <End Role="UserData" EntitySet="UserData" />
+      <End Role="AccessLevelUser" EntitySet="AccessLevelUser" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Class_Lecture" Association="Self.FK_Class_Lecture">
+      <End Role="Lecture" EntitySet="Lecture" />
+      <End Role="ClassRoom" EntitySet="ClassRoom" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Class_UserData" Association="Self.FK_Class_UserData">
+      <End Role="UserData" EntitySet="UserData" />
+      <End Role="ClassRoom" EntitySet="ClassRoom" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Enrollment_Class" Association="Self.FK_Enrollment_Class">
+      <End Role="ClassRoom" EntitySet="ClassRoom" />
+      <End Role="Enrollment" EntitySet="Enrollment" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Enrollment_Student" Association="Self.FK_Enrollment_Student">
+      <End Role="Student" EntitySet="Student" />
+      <End Role="Enrollment" EntitySet="Enrollment" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Enrollment_UserData" Association="Self.FK_Enrollment_UserData">
+      <End Role="UserData" EntitySet="UserData" />
+      <End Role="Enrollment" EntitySet="Enrollment" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Lecture_UserData" Association="Self.FK_Lecture_UserData">
+      <End Role="UserData" EntitySet="UserData" />
+      <End Role="Lecture" EntitySet="Lecture" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Lecture_UserData1" Association="Self.FK_Lecture_UserData1">
+      <End Role="UserData" EntitySet="UserData" />
+      <End Role="Lecture" EntitySet="Lecture" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Payment_Enrollment" Association="Self.FK_Payment_Enrollment">
+      <End Role="Enrollment" EntitySet="Enrollment" />
+      <End Role="Payment" EntitySet="Payment" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Payment_UserData" Association="Self.FK_Payment_UserData">
+      <End Role="UserData" EntitySet="UserData" />
+      <End Role="Payment" EntitySet="Payment" />
+    </AssociationSet>
+    <AssociationSet Name="FK_SellingItem_UserData" Association="Self.FK_SellingItem_UserData">
+      <End Role="UserData" EntitySet="UserData" />
+      <End Role="SellingItem" EntitySet="SellingItem" />
+    </AssociationSet>
+    <AssociationSet Name="FK_SellingItemInvoice_UserData" Association="Self.FK_SellingItemInvoice_UserData">
+      <End Role="UserData" EntitySet="UserData" />
+      <End Role="SellingItemInvoice" EntitySet="SellingItemInvoice" />
+    </AssociationSet>
+    <AssociationSet Name="FK_SellingItemInvoiceDetail_SellingItem" Association="Self.FK_SellingItemInvoiceDetail_SellingItem">
+      <End Role="SellingItem" EntitySet="SellingItem" />
+      <End Role="SellingItemInvoiceDetail" EntitySet="SellingItemInvoiceDetail" />
+    </AssociationSet>
+    <AssociationSet Name="FK_SellingItemInvoiceDetail_SellingItemInvoice" Association="Self.FK_SellingItemInvoiceDetail_SellingItemInvoice">
+      <End Role="SellingItemInvoice" EntitySet="SellingItemInvoice" />
+      <End Role="SellingItemInvoiceDetail" EntitySet="SellingItemInvoiceDetail" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Student_UserData" Association="Self.FK_Student_UserData">
+      <End Role="UserData" EntitySet="UserData" />
+      <End Role="Student" EntitySet="Student" />
+    </AssociationSet>
+    <AssociationSet Name="FK_StudentAttendance_Student" Association="Self.FK_StudentAttendance_Student">
+      <End Role="UserData" EntitySet="UserData" />
+      <End Role="StudentAttendance" EntitySet="StudentAttendance" />
+    </AssociationSet>
+    <AssociationSet Name="FK_StudentAttendance_Student1" Association="Self.FK_StudentAttendance_Student1">
+      <End Role="Student" EntitySet="Student" />
+      <End Role="StudentAttendance" EntitySet="StudentAttendance" />
+    </AssociationSet>
+    <AssociationSet Name="FK_UserAttendance_UserData" Association="Self.FK_UserAttendance_UserData">
+      <End Role="UserData" EntitySet="UserData" />
+      <End Role="UserAttendance" EntitySet="UserAttendance" />
+    </AssociationSet>
+    <AssociationSet Name="FK_UserAttendance_UserData1" Association="Self.FK_UserAttendance_UserData1">
+      <End Role="UserData" EntitySet="UserData" />
+      <End Role="UserAttendance" EntitySet="UserAttendance" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

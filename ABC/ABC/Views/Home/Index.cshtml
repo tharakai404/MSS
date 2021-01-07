@@ -1,0 +1,36 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+}
+
+
+<div id="summary-panel-home" style="padding: 15%;">
+    <h2 style="text-align:center;">Welcome to Thakshilawa</h2>
+</div>
+
+<script>
+
+
+ //  myfunction();
+
+    function myfunction() {
+         $.ajax(
+                {
+                    url: '@Url.Action("GetDashbordData", "Report")',
+                    cache: false,
+                    type: 'get',
+                    dataType: "html",
+                    success: successFunc,
+                    error: errorFunc
+                });
+
+                function successFunc(data)
+                {
+                   $("#summary-panel-home").html(data);
+                }
+
+                function errorFunc(error)
+                {
+                    alert('MVC controller call failed.');
+                }
+    }
+</script>

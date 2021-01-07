@@ -1,0 +1,42 @@
+﻿@model IEnumerable<ABC.Models.DuePayDTO>
+
+@{
+    ViewBag.Title = "Due Payment";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.classname)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.amount)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.classname)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.amount)
+            </td>
+
+        </tr>
+    }
+
+</table>
+
+<p>
+    @Html.ActionLink("Back to List", "Index")
+</p>

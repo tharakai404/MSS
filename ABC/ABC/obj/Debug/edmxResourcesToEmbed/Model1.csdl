@@ -1,0 +1,461 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityContainer Name="Apartment_managementEntities2" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="AppRoles" EntityType="Model.AppRole" />
+    <EntitySet Name="Owners" EntityType="Model.Owner" />
+    <EntitySet Name="Payments" EntityType="Model.Payment" />
+    <EntitySet Name="Rents" EntityType="Model.Rent" />
+    <EntitySet Name="ResidentialUnits" EntityType="Model.ResidentialUnit" />
+    <EntitySet Name="sysdiagrams" EntityType="Model.sysdiagram" />
+    <EntitySet Name="Tenants" EntityType="Model.Tenant" />
+    <EntitySet Name="UserDatas" EntityType="Model.UserData" />
+    <AssociationSet Name="FK_ResidentialUnits_Owner" Association="Model.FK_ResidentialUnits_Owner">
+      <End Role="Owner" EntitySet="Owners" />
+      <End Role="ResidentialUnit" EntitySet="ResidentialUnits" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Payment_Payment_tenant" Association="Model.FK_Payment_Payment_tenant">
+      <End Role="Tenant" EntitySet="Tenants" />
+      <End Role="Payment" EntitySet="Payments" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Payment_Payment_unit" Association="Model.FK_Payment_Payment_unit">
+      <End Role="ResidentialUnit" EntitySet="ResidentialUnits" />
+      <End Role="Payment" EntitySet="Payments" />
+    </AssociationSet>
+    <AssociationSet Name="tenant_id" Association="Model.tenant_id">
+      <End Role="Tenant" EntitySet="Tenants" />
+      <End Role="Rent" EntitySet="Rents" />
+    </AssociationSet>
+    <AssociationSet Name="unit_id" Association="Model.unit_id">
+      <End Role="ResidentialUnit" EntitySet="ResidentialUnits" />
+      <End Role="Rent" EntitySet="Rents" />
+    </AssociationSet>
+    <FunctionImport Name="sp_alterdiagram">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+      <Parameter Name="version" Mode="In" Type="Int32" />
+      <Parameter Name="definition" Mode="In" Type="Binary" />
+    </FunctionImport>
+    <FunctionImport Name="sp_creatediagram">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+      <Parameter Name="version" Mode="In" Type="Int32" />
+      <Parameter Name="definition" Mode="In" Type="Binary" />
+    </FunctionImport>
+    <FunctionImport Name="sp_dropdiagram">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="sp_helpdiagramdefinition" ReturnType="Collection(Model.sp_helpdiagramdefinition_Result)">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="sp_helpdiagrams" ReturnType="Collection(Model.sp_helpdiagrams_Result)">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="sp_renamediagram">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+      <Parameter Name="new_diagramname" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="sp_upgraddiagrams" />
+    <EntitySet Name="RentPaymentDetails" EntityType="Model.RentPaymentDetail" />
+    <AssociationSet Name="FK_RentPaymentDetails_Rent" Association="Model.FK_RentPaymentDetails_Rent">
+      <End Role="Rent" EntitySet="Rents" />
+      <End Role="RentPaymentDetail" EntitySet="RentPaymentDetails" />
+    </AssociationSet>
+    <AssociationSet Name="FK_RentPaymentDetails_ResidentialUnits" Association="Model.FK_RentPaymentDetails_ResidentialUnits">
+      <End Role="ResidentialUnit" EntitySet="ResidentialUnits" />
+      <End Role="RentPaymentDetail" EntitySet="RentPaymentDetails" />
+    </AssociationSet>
+    <AssociationSet Name="FK_RentPaymentDetails_Tenant" Association="Model.FK_RentPaymentDetails_Tenant">
+      <End Role="Tenant" EntitySet="Tenants" />
+      <End Role="RentPaymentDetail" EntitySet="RentPaymentDetails" />
+    </AssociationSet>
+    <AssociationSet Name="FK_RentPaymentDetails_Payment" Association="Model.FK_RentPaymentDetails_Payment">
+      <End Role="Payment" EntitySet="Payments" />
+      <End Role="RentPaymentDetail" EntitySet="RentPaymentDetails" />
+    </AssociationSet>
+    <EntitySet Name="UserLog" EntityType="Model.UserLog" />
+    <EntitySet Name="SecurityOfficer" EntityType="Model.SecurityOfficer" />
+    <AssociationSet Name="FK_Security_ResidentialUnits" Association="Model.FK_Security_ResidentialUnits">
+      <End Role="ResidentialUnit" EntitySet="ResidentialUnits" />
+      <End Role="SecurityOfficer" EntitySet="SecurityOfficer" />
+    </AssociationSet>
+    <EntitySet Name="UserRole" EntityType="Model.UserRole" />
+    <AssociationSet Name="FK_UserRole_AppRole" Association="Model.FK_UserRole_AppRole">
+      <End Role="AppRole" EntitySet="AppRoles" />
+      <End Role="UserRole" EntitySet="UserRole" />
+    </AssociationSet>
+    <AssociationSet Name="FK_UserRole_userdata" Association="Model.FK_UserRole_userdata">
+      <End Role="UserData" EntitySet="UserDatas" />
+      <End Role="UserRole" EntitySet="UserRole" />
+    </AssociationSet>
+    <EntitySet Name="Maintenance" EntityType="Model.Maintenance" />
+    <AssociationSet Name="FK_unit_id" Association="Model.FK_unit_id">
+      <End Role="ResidentialUnit" EntitySet="ResidentialUnits" />
+      <End Role="Maintenance" EntitySet="Maintenance" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="AppRole">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Role" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="UserRole" Relationship="Model.FK_UserRole_AppRole" FromRole="AppRole" ToRole="UserRole" />
+  </EntityType>
+  <EntityType Name="Owner">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Address" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Telephone" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="ResidentialUnits" Relationship="Model.FK_ResidentialUnits_Owner" FromRole="Owner" ToRole="ResidentialUnit" />
+    <Property Name="CreatedBy" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="CreatedDate" Type="DateTime" Precision="0" />
+    <Property Name="UpdatedBy" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="UpdatedDate" Type="DateTime" Precision="0" />
+  </EntityType>
+  <EntityType Name="Payment">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" />
+    <Property Name="Date" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="Description" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Amount" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+    <Property Name="Type" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="tenant_id" Type="Int32" Nullable="false" />
+    <Property Name="unit_id" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Tenant" Relationship="Model.FK_Payment_Payment_tenant" FromRole="Payment" ToRole="Tenant" />
+    <NavigationProperty Name="ResidentialUnit" Relationship="Model.FK_Payment_Payment_unit" FromRole="Payment" ToRole="ResidentialUnit" />
+    <NavigationProperty Name="RentPaymentDetails" Relationship="Model.FK_RentPaymentDetails_Payment" FromRole="Payment" ToRole="RentPaymentDetail" />
+    <Property Name="CreatedBy" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="CreatedDate" Type="DateTime" Precision="0" />
+    <Property Name="UpdatedBy" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="UpdatedDate" Type="DateTime" Precision="0" />
+  </EntityType>
+  <EntityType Name="Rent">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="tenant_id" Type="Int32" Nullable="false" />
+    <Property Name="unit_id" Type="Int32" Nullable="false" />
+    <Property Name="Date" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="PeriodsInMonths" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Tenant" Relationship="Model.tenant_id" FromRole="Rent" ToRole="Tenant" />
+    <NavigationProperty Name="ResidentialUnit" Relationship="Model.unit_id" FromRole="Rent" ToRole="ResidentialUnit" />
+    <Property Name="monthlyRentFee" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+    <Property Name="KeyMoney" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+    <NavigationProperty Name="RentPaymentDetails" Relationship="Model.FK_RentPaymentDetails_Rent" FromRole="Rent" ToRole="RentPaymentDetail" />
+    <Property Name="CreatedBy" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="CreatedDate" Type="DateTime" Precision="0" />
+    <Property Name="UpdatedBy" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="UpdatedDate" Type="DateTime" Precision="0" />
+  </EntityType>
+  <EntityType Name="ResidentialUnit">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Address" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Description" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="owner_id" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Owner" Relationship="Model.FK_ResidentialUnits_Owner" FromRole="ResidentialUnit" ToRole="Owner" />
+    <NavigationProperty Name="Payments" Relationship="Model.FK_Payment_Payment_unit" FromRole="ResidentialUnit" ToRole="Payment" />
+    <NavigationProperty Name="Rents" Relationship="Model.unit_id" FromRole="ResidentialUnit" ToRole="Rent" />
+    <NavigationProperty Name="RentPaymentDetails" Relationship="Model.FK_RentPaymentDetails_ResidentialUnits" FromRole="ResidentialUnit" ToRole="RentPaymentDetail" />
+    <Property Name="CreatedBy" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="CreatedDate" Type="DateTime" Precision="0" />
+    <Property Name="UpdatedBy" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="UpdatedDate" Type="DateTime" Precision="0" />
+    <NavigationProperty Name="SecurityOfficer" Relationship="Model.FK_Security_ResidentialUnits" FromRole="ResidentialUnit" ToRole="SecurityOfficer" />
+    <NavigationProperty Name="Maintenance" Relationship="Model.FK_unit_id" FromRole="ResidentialUnit" ToRole="Maintenance" />
+  </EntityType>
+  <EntityType Name="sysdiagram">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="principal_id" Type="Int32" Nullable="false" />
+    <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="version" Type="Int32" />
+    <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+  </EntityType>
+  <EntityType Name="Tenant">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Telephone" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="NIC" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="Payments" Relationship="Model.FK_Payment_Payment_tenant" FromRole="Tenant" ToRole="Payment" />
+    <NavigationProperty Name="Rents" Relationship="Model.tenant_id" FromRole="Tenant" ToRole="Rent" />
+    <NavigationProperty Name="RentPaymentDetails" Relationship="Model.FK_RentPaymentDetails_Tenant" FromRole="Tenant" ToRole="RentPaymentDetail" />
+    <Property Name="CreatedBy" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="CreatedDate" Type="DateTime" Precision="0" />
+    <Property Name="UpdatedBy" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="UpdatedDate" Type="DateTime" Precision="0" />
+  </EntityType>
+  <EntityType Name="UserData">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="UserId" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="UserName" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Password" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="CreatedBy" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="CreatedDate" Type="DateTime" Precision="0" />
+    <Property Name="UpdatedBy" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="UpdatedDate" Type="DateTime" Precision="0" />
+    <NavigationProperty Name="UserRole" Relationship="Model.FK_UserRole_userdata" FromRole="UserData" ToRole="UserRole" />
+  </EntityType>
+  <Association Name="FK_ResidentialUnits_Owner">
+    <End Type="Model.Owner" Role="Owner" Multiplicity="1" />
+    <End Type="Model.ResidentialUnit" Role="ResidentialUnit" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Owner">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="ResidentialUnit">
+        <PropertyRef Name="owner_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Payment_Payment_tenant">
+    <End Type="Model.Tenant" Role="Tenant" Multiplicity="1" />
+    <End Type="Model.Payment" Role="Payment" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Tenant">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="Payment">
+        <PropertyRef Name="tenant_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Payment_Payment_unit">
+    <End Type="Model.ResidentialUnit" Role="ResidentialUnit" Multiplicity="1" />
+    <End Type="Model.Payment" Role="Payment" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ResidentialUnit">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="Payment">
+        <PropertyRef Name="unit_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="tenant_id">
+    <End Type="Model.Tenant" Role="Tenant" Multiplicity="1" />
+    <End Type="Model.Rent" Role="Rent" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Tenant">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="Rent">
+        <PropertyRef Name="tenant_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="unit_id">
+    <End Type="Model.ResidentialUnit" Role="ResidentialUnit" Multiplicity="1" />
+    <End Type="Model.Rent" Role="Rent" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ResidentialUnit">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="Rent">
+        <PropertyRef Name="unit_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <ComplexType Name="sp_helpdiagramdefinition_Result">
+    <Property Type="Int32" Name="version" Nullable="true" />
+    <Property Type="Binary" Name="definition" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="sp_helpdiagrams_Result">
+    <Property Type="String" Name="Database" Nullable="true" MaxLength="128" />
+    <Property Type="String" Name="Name" Nullable="false" MaxLength="128" />
+    <Property Type="Int32" Name="ID" Nullable="false" />
+    <Property Type="String" Name="Owner" Nullable="true" MaxLength="128" />
+    <Property Type="Int32" Name="OwnerID" Nullable="false" />
+  </ComplexType>
+  <EntityType Name="RentPaymentDetail">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Date" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="tenant_id" Type="Int32" Nullable="false" />
+    <Property Name="unit_id" Type="Int32" Nullable="false" />
+    <Property Name="rent_id" Type="Int32" Nullable="false" />
+    <Property Name="amount" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+    <NavigationProperty Name="Rent" Relationship="Model.FK_RentPaymentDetails_Rent" FromRole="RentPaymentDetail" ToRole="Rent" />
+    <NavigationProperty Name="ResidentialUnit" Relationship="Model.FK_RentPaymentDetails_ResidentialUnits" FromRole="RentPaymentDetail" ToRole="ResidentialUnit" />
+    <NavigationProperty Name="Tenant" Relationship="Model.FK_RentPaymentDetails_Tenant" FromRole="RentPaymentDetail" ToRole="Tenant" />
+    <Property Name="payment_id" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Payment" Relationship="Model.FK_RentPaymentDetails_Payment" FromRole="RentPaymentDetail" ToRole="Payment" />
+    <Property Name="CreatedBy" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="CreatedDate" Type="DateTime" Precision="0" />
+    <Property Name="UpdatedBy" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="UpdatedDate" Type="DateTime" Precision="0" />
+  </EntityType>
+  <Association Name="FK_RentPaymentDetails_Rent">
+    <End Type="Model.Rent" Role="Rent" Multiplicity="1" />
+    <End Type="Model.RentPaymentDetail" Role="RentPaymentDetail" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Rent">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="RentPaymentDetail">
+        <PropertyRef Name="rent_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_RentPaymentDetails_ResidentialUnits">
+    <End Type="Model.ResidentialUnit" Role="ResidentialUnit" Multiplicity="1" />
+    <End Type="Model.RentPaymentDetail" Role="RentPaymentDetail" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ResidentialUnit">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="RentPaymentDetail">
+        <PropertyRef Name="unit_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_RentPaymentDetails_Tenant">
+    <End Type="Model.Tenant" Role="Tenant" Multiplicity="1" />
+    <End Type="Model.RentPaymentDetail" Role="RentPaymentDetail" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Tenant">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="RentPaymentDetail">
+        <PropertyRef Name="tenant_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_RentPaymentDetails_Payment">
+    <End Type="Model.Payment" Role="Payment" Multiplicity="1" />
+    <End Type="Model.RentPaymentDetail" Role="RentPaymentDetail" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Payment">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="RentPaymentDetail">
+        <PropertyRef Name="payment_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="UserLog">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Date" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="User_name" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Description" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="SecurityOfficer">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="OfficerName" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Contact_no" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="NIC" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="unit_id" Type="Int32" Nullable="false" />
+    <Property Name="CreatedBy" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="CreatedDate" Type="DateTime" Precision="0" />
+    <Property Name="UpdatedBy" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="UpdateDate" Type="DateTime" Precision="0" />
+    <NavigationProperty Name="ResidentialUnits" Relationship="Model.FK_Security_ResidentialUnits" FromRole="SecurityOfficer" ToRole="ResidentialUnit" />
+  </EntityType>
+  <Association Name="FK_Security_ResidentialUnits">
+    <End Type="Model.ResidentialUnit" Role="ResidentialUnit" Multiplicity="1" />
+    <End Type="Model.SecurityOfficer" Role="SecurityOfficer" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ResidentialUnit">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="SecurityOfficer">
+        <PropertyRef Name="unit_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="UserRole">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="user_id" Type="Int32" Nullable="false" />
+    <Property Name="role_id" Type="Int32" Nullable="false" />
+    <Property Name="loginId" Type="String" Nullable="false" MaxLength="10" FixedLength="true" Unicode="true" />
+    <Property Name="CreatedBy" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="CreatedDate" Type="DateTime" Precision="0" />
+    <Property Name="UpdatedBy" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="UpdatedDate" Type="DateTime" Precision="0" />
+    <NavigationProperty Name="AppRole" Relationship="Model.FK_UserRole_AppRole" FromRole="UserRole" ToRole="AppRole" />
+    <NavigationProperty Name="UserData" Relationship="Model.FK_UserRole_userdata" FromRole="UserRole" ToRole="UserData" />
+  </EntityType>
+  <Association Name="FK_UserRole_AppRole">
+    <End Type="Model.AppRole" Role="AppRole" Multiplicity="1" />
+    <End Type="Model.UserRole" Role="UserRole" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AppRole">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="UserRole">
+        <PropertyRef Name="role_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_UserRole_userdata">
+    <End Type="Model.UserData" Role="UserData" Multiplicity="1" />
+    <End Type="Model.UserRole" Role="UserRole" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="UserData">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="UserRole">
+        <PropertyRef Name="user_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="Maintenance">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Description" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Amount" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+    <Property Name="Date" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="unit_id" Type="Int32" Nullable="false" />
+    <Property Name="CreatedBy" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="CreatedDate" Type="DateTime" Precision="0" />
+    <Property Name="UpdatedBy" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="UpdetedDate" Type="DateTime" Precision="0" />
+    <NavigationProperty Name="ResidentialUnits" Relationship="Model.FK_unit_id" FromRole="Maintenance" ToRole="ResidentialUnit" />
+  </EntityType>
+  <Association Name="FK_unit_id">
+    <End Type="Model.ResidentialUnit" Role="ResidentialUnit" Multiplicity="1" />
+    <End Type="Model.Maintenance" Role="Maintenance" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ResidentialUnit">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="Maintenance">
+        <PropertyRef Name="unit_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>

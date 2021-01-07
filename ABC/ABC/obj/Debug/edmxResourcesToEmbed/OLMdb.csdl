@@ -1,0 +1,251 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="OLMModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityContainer Name="OLMEntities" annotation:LazyLoadingEnabled="true">
+    <FunctionImport Name="sp_alterdiagram">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+      <Parameter Name="version" Mode="In" Type="Int32" />
+      <Parameter Name="definition" Mode="In" Type="Binary" />
+    </FunctionImport>
+    <FunctionImport Name="sp_creatediagram">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+      <Parameter Name="version" Mode="In" Type="Int32" />
+      <Parameter Name="definition" Mode="In" Type="Binary" />
+    </FunctionImport>
+    <FunctionImport Name="sp_dropdiagram">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="sp_helpdiagramdefinition" ReturnType="Collection(OLMModel.sp_helpdiagramdefinition_Result)">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="sp_helpdiagrams" ReturnType="Collection(OLMModel.sp_helpdiagrams_Result)">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="sp_renamediagram">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+      <Parameter Name="new_diagramname" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="sp_upgraddiagrams" />
+    <EntitySet Name="appUsers" EntityType="OLMModel.appUser" />
+    <EntitySet Name="customers" EntityType="OLMModel.customer" />
+    <EntitySet Name="customerOrders" EntityType="OLMModel.customerOrder" />
+    <EntitySet Name="customerOrderDTLs" EntityType="OLMModel.customerOrderDTL" />
+    <EntitySet Name="payments" EntityType="OLMModel.payment" />
+    <EntitySet Name="services" EntityType="OLMModel.service" />
+    <EntitySet Name="sysdiagrams" EntityType="OLMModel.sysdiagram" />
+    <AssociationSet Name="FK_customerOrder_customer" Association="OLMModel.FK_customerOrder_customer">
+      <End Role="customer" EntitySet="customers" />
+      <End Role="customerOrder" EntitySet="customerOrders" />
+    </AssociationSet>
+    <AssociationSet Name="FK_customerOrderDTL_customerOrder" Association="OLMModel.FK_customerOrderDTL_customerOrder">
+      <End Role="customerOrder" EntitySet="customerOrders" />
+      <End Role="customerOrderDTL" EntitySet="customerOrderDTLs" />
+    </AssociationSet>
+    <AssociationSet Name="FK_payment_customerOrder" Association="OLMModel.FK_payment_customerOrder">
+      <End Role="customerOrder" EntitySet="customerOrders" />
+      <End Role="payment" EntitySet="payments" />
+    </AssociationSet>
+    <AssociationSet Name="FK_customerOrderDTL_service" Association="OLMModel.FK_customerOrderDTL_service">
+      <End Role="service" EntitySet="services" />
+      <End Role="customerOrderDTL" EntitySet="customerOrderDTLs" />
+    </AssociationSet>
+    <EntitySet Name="AppRoles" EntityType="OLMModel.AppRole" />
+    <EntitySet Name="userandroles" EntityType="OLMModel.userandrole" />
+    <AssociationSet Name="FK_userandrole_AppRole" Association="OLMModel.FK_userandrole_AppRole">
+      <End Role="AppRole" EntitySet="AppRoles" />
+      <End Role="userandrole" EntitySet="userandroles" />
+    </AssociationSet>
+    <AssociationSet Name="FK_userandrole_appUser" Association="OLMModel.FK_userandrole_appUser">
+      <End Role="appUser" EntitySet="appUsers" />
+      <End Role="userandrole" EntitySet="userandroles" />
+    </AssociationSet>
+  </EntityContainer>
+  <ComplexType Name="sp_helpdiagramdefinition_Result">
+    <Property Type="Int32" Name="version" Nullable="true" />
+    <Property Type="Binary" Name="definition" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="sp_helpdiagrams_Result">
+    <Property Type="String" Name="Database" Nullable="true" MaxLength="128" />
+    <Property Type="String" Name="Name" Nullable="false" MaxLength="128" />
+    <Property Type="Int32" Name="ID" Nullable="false" />
+    <Property Type="String" Name="Owner" Nullable="true" MaxLength="128" />
+    <Property Type="Int32" Name="OwnerID" Nullable="false" />
+  </ComplexType>
+  <EntityType Name="appUser">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="username" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="password" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="type" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="userandroles" Relationship="OLMModel.FK_userandrole_appUser" FromRole="appUser" ToRole="userandrole" />
+  </EntityType>
+  <EntityType Name="customer">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="name" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="mobile" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="address" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="email" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="customerOrders" Relationship="OLMModel.FK_customerOrder_customer" FromRole="customer" ToRole="customerOrder" />
+  </EntityType>
+  <EntityType Name="customerOrder">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="customerId" Type="Int32" Nullable="false" />
+    <Property Name="date" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="deliverDate" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="total" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+    <Property Name="status" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="remarks" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="customer" Relationship="OLMModel.FK_customerOrder_customer" FromRole="customerOrder" ToRole="customer" />
+    <NavigationProperty Name="customerOrderDTLs" Relationship="OLMModel.FK_customerOrderDTL_customerOrder" FromRole="customerOrder" ToRole="customerOrderDTL" />
+    <NavigationProperty Name="payments" Relationship="OLMModel.FK_payment_customerOrder" FromRole="customerOrder" ToRole="payment" />
+  </EntityType>
+  <EntityType Name="customerOrderDTL">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="customerOrderId" Type="Int32" />
+    <Property Name="serviceId" Type="Int32" />
+    <Property Name="qty" Type="Int32" />
+    <Property Name="wash" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="Iron" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="dryclean" Type="Decimal" Precision="18" Scale="2" />
+    <NavigationProperty Name="customerOrder" Relationship="OLMModel.FK_customerOrderDTL_customerOrder" FromRole="customerOrderDTL" ToRole="customerOrder" />
+    <NavigationProperty Name="service" Relationship="OLMModel.FK_customerOrderDTL_service" FromRole="customerOrderDTL" ToRole="service" />
+  </EntityType>
+  <EntityType Name="payment">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" />
+    <Property Name="customerOrderId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="amount" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+    <Property Name="type" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="customerOrder" Relationship="OLMModel.FK_payment_customerOrder" FromRole="payment" ToRole="customerOrder" />
+  </EntityType>
+  <EntityType Name="service">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="service1" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="description" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="wash" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+    <Property Name="IronRate" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+    <Property Name="dryclean" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+    <NavigationProperty Name="customerOrderDTLs" Relationship="OLMModel.FK_customerOrderDTL_service" FromRole="service" ToRole="customerOrderDTL" />
+  </EntityType>
+  <EntityType Name="sysdiagram">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="principal_id" Type="Int32" Nullable="false" />
+    <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="version" Type="Int32" />
+    <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+  </EntityType>
+  <Association Name="FK_customerOrder_customer">
+    <End Type="OLMModel.customer" Role="customer" Multiplicity="1" />
+    <End Type="OLMModel.customerOrder" Role="customerOrder" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="customer">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="customerOrder">
+        <PropertyRef Name="customerId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_customerOrderDTL_customerOrder">
+    <End Type="OLMModel.customerOrder" Role="customerOrder" Multiplicity="0..1" />
+    <End Type="OLMModel.customerOrderDTL" Role="customerOrderDTL" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="customerOrder">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="customerOrderDTL">
+        <PropertyRef Name="customerOrderId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_payment_customerOrder">
+    <End Type="OLMModel.customerOrder" Role="customerOrder" Multiplicity="1" />
+    <End Type="OLMModel.payment" Role="payment" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="customerOrder">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="payment">
+        <PropertyRef Name="customerOrderId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_customerOrderDTL_service">
+    <End Type="OLMModel.service" Role="service" Multiplicity="0..1" />
+    <End Type="OLMModel.customerOrderDTL" Role="customerOrderDTL" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="service">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="customerOrderDTL">
+        <PropertyRef Name="serviceId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="AppRole">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Role" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="userandroles" Relationship="OLMModel.FK_userandrole_AppRole" FromRole="AppRole" ToRole="userandrole" />
+  </EntityType>
+  <EntityType Name="userandrole">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="appuserid" Type="Int32" Nullable="false" />
+    <Property Name="approleid" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="AppRole" Relationship="OLMModel.FK_userandrole_AppRole" FromRole="userandrole" ToRole="AppRole" />
+    <NavigationProperty Name="appUser" Relationship="OLMModel.FK_userandrole_appUser" FromRole="userandrole" ToRole="appUser" />
+  </EntityType>
+  <Association Name="FK_userandrole_AppRole">
+    <End Type="OLMModel.AppRole" Role="AppRole" Multiplicity="1" />
+    <End Type="OLMModel.userandrole" Role="userandrole" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AppRole">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="userandrole">
+        <PropertyRef Name="approleid" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_userandrole_appUser">
+    <End Type="OLMModel.appUser" Role="appUser" Multiplicity="1" />
+    <End Type="OLMModel.userandrole" Role="userandrole" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="appUser">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="userandrole">
+        <PropertyRef Name="appuserid" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>

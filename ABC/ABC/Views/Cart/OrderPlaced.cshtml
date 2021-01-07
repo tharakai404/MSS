@@ -1,0 +1,63 @@
+﻿@model ABC.customerOrder
+
+@{
+    Layout = "~/Views/Shared/_Layout2.cshtml";
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Your Order has been Placed</title>
+</head>
+<body>
+    <div>
+        <h1>Your order has been placed!</h1>
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.customer.name)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.customer.name)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.date)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.date)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.total)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.total)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.status)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.status)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.remarks)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.remarks)
+            </dd>
+
+
+
+        </dl>
+        <h4> Confirmation has been set to this email : @Html.DisplayFor(model => model.customer.email)</h4>
+    </div>
+</body>
+</html>
